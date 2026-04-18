@@ -324,7 +324,7 @@ export default function Home() {
               title="PMP Inc"
               category="Business / Professional"
               description="A polished business website designed to increase credibility, elevate brand presence, and create a stronger premium first impression."
-              image="/web-design.jpg"
+              image="/pmp.jpg"
               href="https://pmp-inc-website.vercel.app/"
             />
 
