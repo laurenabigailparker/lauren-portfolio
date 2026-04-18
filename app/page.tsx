@@ -392,13 +392,13 @@ export default function Home() {
               whileHover={{ y: -6 }}
               className="rounded-[2.2rem] border border-[#DFD8CC] bg-[#FCFAF6]/85 p-5 shadow-[0_24px_70px_rgba(22,49,38,0.08)] backdrop-blur-xl"
             >
-              <div className="overflow-hidden rounded-[1.7rem]">
-                <img
-                  src="/web-design.jpg"
-                  alt="PMP Inc case study"
-                  className="h-[420px] w-full object-cover transition duration-700 hover:scale-[1.02] md:h-[540px]"
-                />
-              </div>
+              <div className="mt-10 overflow-hidden rounded-[2rem] border border-[#DFD8CC] bg-[#FCFAF6]/90 shadow-[0_25px_70px_rgba(22,49,38,0.08)]">
+  <img
+    src="/pmp-case.jpg"
+    alt="PMP Inc case study"
+    className="w-full object-cover"
+  />
+</div>
             </motion.div>
 
             <motion.div
