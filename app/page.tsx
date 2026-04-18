@@ -739,6 +739,12 @@ export default function Home() {
   />
 
   <input
+  type="hidden"
+  name="_next"
+  value="https://laurenparkerstudio.com/thank-you"
+/>
+
+  <input
     type="email"
     name="email"
     placeholder="Your email"
