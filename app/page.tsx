@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { useEffect, useState } from "react";
+
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -52,12 +53,19 @@ function ProjectCard({
         className="relative overflow-hidden rounded-[2rem] border border-[#DFD8CC] bg-[#FCFAF6]/85 p-4 shadow-[0_18px_50px_rgba(22,49,38,0.08)] backdrop-blur-xl"
         style={{ transformStyle: "preserve-3d" }}
       >
-        <Link href={href} target="_blank" className="block">
+        <Link
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block"
+        >
           <div className="relative overflow-hidden rounded-[1.5rem]">
             <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#163126]/18 via-transparent to-transparent opacity-70" />
-            <img
+            <Image
               src={image}
               alt={title}
+              width={600}
+              height={400}
               className="h-[290px] w-full object-cover transition duration-700 group-hover:scale-105"
             />
           </div>
@@ -68,7 +76,9 @@ function ProjectCard({
             </div>
 
             <div className="flex items-start justify-between gap-4">
-              <h3 className="text-2xl font-semibold text-[#163126]">{title}</h3>
+              <h3 className="text-2xl font-semibold text-[#163126]">
+                {title}
+              </h3>
               <div className="rounded-full bg-[#EEF3EE] p-2 text-[#163126] transition duration-300 group-hover:bg-[#163126] group-hover:text-white">
                 <ArrowUpRight className="h-4 w-4 transition duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]" />
               </div>
@@ -93,12 +103,6 @@ export default function Home() {
   const smoothX = useSpring(mouseX, { damping: 30, stiffness: 180 });
   const smoothY = useSpring(mouseY, { damping: 30, stiffness: 180 });
 
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   return (
     <main
       className="relative overflow-x-hidden bg-[#F7F3EC] text-[#1E221F]"
@@ -111,13 +115,12 @@ export default function Home() {
         mouseY.set(-200);
       }}
     >
-      {mounted && (
-        <motion.div
-          aria-hidden="true"
-          className="pointer-events-none fixed left-0 top-0 z-0 h-[320px] w-[320px] rounded-full bg-[radial-gradient(circle,rgba(45,74,58,0.14)_0%,rgba(197,164,109,0.08)_35%,transparent_72%)] blur-3xl"
-          style={{ x: smoothX, y: smoothY }}
-        />
-      )}
+     <motion.div
+  aria-hidden="true"
+  className="pointer-events-none fixed left-0 top-0 z-0 h-[320px] w-[320px] rounded-full bg-[radial-gradient(circle,rgba(45,74,58,0.14)_0%,rgba(197,164,109,0.08)_35%,transparent_72%)] blur-3xl"
+  style={{ x: smoothX, y: smoothY }}
+/>
+      
 
       <a
         href="#contact"
@@ -126,7 +129,6 @@ export default function Home() {
         Start Project
       </a>
 
-      {/* NAV */}
       <nav className="sticky top-0 z-40 border-b border-[#E8E0D4] bg-[#F7F3EC]/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-12 lg:px-20">
           <a
@@ -153,7 +155,6 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* HERO */}
       <section className="relative z-10 overflow-hidden px-6 pt-10 md:px-12 lg:px-20 lg:pt-14">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(22,49,38,0.13),transparent_42%)]" />
         <div className="pointer-events-none absolute right-0 top-0 h-[420px] w-[420px] rounded-full bg-[#DAE6DC] blur-3xl opacity-60" />
@@ -167,19 +168,19 @@ export default function Home() {
             className="relative z-10"
           >
             <p className="mb-5 text-xs uppercase tracking-[0.38em] text-[#C5A46D]">
-              Luxury Web Design & Development
+              Full Stack Developer • Luxury Web Design
             </p>
 
             <h1 className="max-w-3xl text-4xl font-semibold leading-[1.04] text-[#163126] md:text-6xl xl:text-7xl">
-              I design websites that make your brand look like it already
-              attracts high-value clients.
+              I design and build websites that make your brand look like it
+              already attracts high-value clients.
             </h1>
 
             <p className="mt-7 max-w-2xl text-base leading-8 text-[#7B746B] md:text-lg">
               Designed for brands that want to look more premium, charge higher,
               and feel more established online. Clean strategy, refined visuals,
-              and polished development — all built to position you at a higher
-              level.
+              and polished development using modern tools like React, Next.js,
+              Tailwind, Supabase, Git, and Vercel.
             </p>
 
             <div className="mt-9 flex flex-wrap gap-4">
@@ -206,7 +207,7 @@ export default function Home() {
             >
               {[
                 ["2+", "featured builds"],
-                ["Custom", "design + development"],
+                ["React", "Next.js + Supabase"],
                 ["$3.5k+", "starting investment"],
               ].map(([num, label]) => (
                 <motion.div
@@ -215,7 +216,9 @@ export default function Home() {
                   whileHover={{ y: -4, scale: 1.01 }}
                   className="rounded-2xl border border-[#E2DDD2] bg-[#FCFAF6]/85 p-5 shadow-[0_14px_35px_rgba(22,49,38,0.05)] backdrop-blur"
                 >
-                  <p className="text-2xl font-semibold text-[#163126]">{num}</p>
+                  <p className="text-2xl font-semibold text-[#163126]">
+                    {num}
+                  </p>
                   <p className="mt-1 text-sm text-[#7B746B]">{label}</p>
                 </motion.div>
               ))}
@@ -232,20 +235,23 @@ export default function Home() {
             <div className="group relative overflow-hidden rounded-[2.4rem] border border-white/60 bg-white/35 shadow-[0_30px_90px_rgba(22,49,38,0.16)] backdrop-blur-xl">
               <div className="absolute -left-10 top-10 h-40 w-40 rounded-full bg-[#C5A46D]/20 blur-3xl" />
               <div className="absolute right-0 top-0 h-48 w-48 rounded-full bg-[#2D4A3A]/20 blur-3xl" />
-              <img
+              <Image
                 src="/home-hero.jpg"
                 alt="Lauren Parker portfolio hero"
+                width={1200}
+                height={800}
                 className="h-[560px] w-full object-cover transition duration-700 group-hover:scale-[1.02] md:h-[670px]"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#163126]/72 via-[#163126]/12 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                 <div className="max-w-md rounded-[1.5rem] border border-white/20 bg-white/10 p-5 backdrop-blur-md">
                   <p className="text-xs uppercase tracking-[0.28em] text-white/75">
-                    Designer Portfolio
+                    Developer Portfolio
                   </p>
                   <p className="mt-3 text-lg font-medium leading-7 text-white">
-                    Strategic design, elevated visuals, and a premium digital
-                    presence that feels intentional at every touchpoint.
+                    Strategic design, elevated visuals, and modern development
+                    that feels intentional at every touchpoint.
                   </p>
                 </div>
               </div>
@@ -254,7 +260,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WHO I WORK WITH */}
       <section className="relative z-10 px-6 py-20 md:px-12 lg:px-20">
         <motion.div {...fadeUp} className="mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl">
@@ -293,8 +298,10 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* FEATURED WORK */}
-      <section id="work" className="relative z-10 px-6 py-24 md:px-12 md:py-28 lg:px-20">
+      <section
+        id="work"
+        className="relative z-10 px-6 py-24 md:px-12 md:py-28 lg:px-20"
+      >
         <motion.div {...fadeUp} className="mx-auto max-w-7xl">
           <div className="mb-14 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
@@ -309,7 +316,7 @@ export default function Home() {
 
             <p className="max-w-xl text-sm leading-8 text-[#7B746B] md:text-base">
               Websites built to position brands with more authority, refinement,
-              and visual confidence.
+              visual confidence, and clean frontend execution.
             </p>
           </div>
 
@@ -323,15 +330,15 @@ export default function Home() {
             <ProjectCard
               title="PMP Inc"
               category="Business / Professional"
-              description="A polished business website designed to increase credibility, elevate brand presence, and create a stronger premium first impression."
+              description="A polished business website built with Next.js, React, Tailwind, Supabase, and Vercel to increase credibility and create a stronger premium first impression."
               image="/pmp.jpg"
-              href="https://pmp-inc-website.vercel.app/"
+              href="https://pmpincprofessionals.com/en"
             />
 
             <ProjectCard
               title="Gateway Rock Design"
               category="Interior Design / Luxury"
-              description="A warm, upscale interior design website focused on refined aesthetics, elevated service positioning, and an intentional luxury feel."
+              description="A warm, upscale interior design website built with Next.js and Tailwind CSS, focused on refined visuals, service positioning, and responsive UX."
               image="/gateway-cover.jpg"
               href="https://gateway-rock-design.vercel.app/"
             />
@@ -365,7 +372,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* PMP CASE STUDY */}
       <section
         id="case-study"
         className="relative z-10 bg-[linear-gradient(180deg,#EEF4EF_0%,#F7F3EC_100%)] px-6 py-24 md:px-12 md:py-28 lg:px-20"
@@ -380,9 +386,9 @@ export default function Home() {
             </h2>
             <div className="mt-4 h-[2px] w-14 bg-[#C5A46D]" />
             <p className="mt-5 text-base leading-8 text-[#7B746B]">
-              A business website designed to feel more credible, polished, and
-              premium — helping the brand present itself with more clarity and
-              authority online.
+              A business website designed and developed to feel more credible,
+              polished, and premium — helping the brand present itself with more
+              clarity and authority online.
             </p>
           </div>
 
@@ -393,12 +399,15 @@ export default function Home() {
               className="rounded-[2.2rem] border border-[#DFD8CC] bg-[#FCFAF6]/85 p-5 shadow-[0_24px_70px_rgba(22,49,38,0.08)] backdrop-blur-xl"
             >
               <div className="mt-10 overflow-hidden rounded-[2rem] border border-[#DFD8CC] bg-[#FCFAF6]/90 shadow-[0_25px_70px_rgba(22,49,38,0.08)]">
-  <img
-    src="/pmp-case.jpg"
-    alt="PMP Inc case study"
-    className="w-full object-cover"
-  />
-</div>
+                <Image
+                  src="/pmp-case.jpg"
+                  alt="PMP Inc case study"
+                  width={1600}
+                  height={900}
+                  className="h-auto w-full object-cover"
+                  priority
+                />
+              </div>
             </motion.div>
 
             <motion.div
@@ -429,14 +438,14 @@ export default function Home() {
                 className="rounded-[1.8rem] border border-[#DFD8CC] bg-[#FCFAF6]/85 p-7 shadow-[0_18px_55px_rgba(22,49,38,0.06)] backdrop-blur-xl"
               >
                 <p className="text-sm uppercase tracking-[0.24em] text-[#C5A46D]">
-                  What I Focused On
+                  Tech + Development
                 </p>
                 <ul className="mt-4 space-y-3 text-sm leading-8 text-[#7B746B]">
-                  <li>Luxury-inspired visual direction</li>
-                  <li>Cleaner layout and stronger hierarchy</li>
-                  <li>More intentional brand presentation</li>
-                  <li>Professional, high-trust first impression</li>
-                  <li>Smooth responsive experience across devices</li>
+                  <li>Next.js, React, Tailwind CSS, Supabase, Vercel</li>
+                  <li>Reusable component structure</li>
+                  <li>Responsive layouts across desktop and mobile</li>
+                  <li>Backend functionality with Supabase</li>
+                  <li>Performance-minded frontend implementation</li>
                 </ul>
               </motion.div>
 
@@ -455,8 +464,9 @@ export default function Home() {
                 </p>
 
                 <Link
-                  href="https://pmp-inc-website.vercel.app/"
+                  href="https://pmpincprofessionals.com/en"
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-6 inline-flex rounded-full bg-[#F5EDE3] px-6 py-3 text-sm font-medium text-[#163126] transition hover:opacity-90"
                 >
                   View PMP Inc
@@ -467,7 +477,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* WHY WORK WITH ME */}
       <section className="relative z-10 px-6 py-24 md:px-12 md:py-28 lg:px-20">
         <motion.div {...fadeUp} className="mx-auto max-w-7xl">
           <div className="mb-14 max-w-2xl">
@@ -524,7 +533,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* TESTIMONIALS */}
       <section className="relative z-10 bg-[linear-gradient(180deg,#F7F3EC_0%,#EEF4EF_100%)] px-6 py-24 md:px-12 md:py-28 lg:px-20">
         <motion.div {...fadeUp} className="mx-auto max-w-7xl">
           <div className="mb-14 max-w-2xl">
@@ -584,7 +592,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* PRICING */}
       <section
         id="pricing"
         className="relative z-10 bg-[linear-gradient(180deg,#EEF4EF_0%,#F7F3EC_100%)] px-6 py-24 md:px-12 md:py-28 lg:px-20"
@@ -605,82 +612,102 @@ export default function Home() {
           </div>
 
           <div className="grid gap-8 lg:grid-cols-3">
-            <motion.div
-              whileHover={{ y: -6 }}
-              className="rounded-[2rem] border border-[#DFD8CC] bg-[#FCFAF6]/90 p-8 shadow-[0_20px_60px_rgba(22,49,38,0.08)] backdrop-blur-xl"
-            >
-              <p className="text-sm uppercase tracking-[0.25em] text-[#C5A46D]">
-                Essential
-              </p>
-              <h3 className="mt-4 text-4xl font-semibold text-[#163126]">
-                $3,500+
-              </h3>
-              <p className="mt-4 text-sm leading-7 text-[#7B746B]">
-                A polished custom site for brands that need a clean, elevated,
-                and professional online presence.
-              </p>
+            {[
+              {
+                name: "Essential",
+                price: "$3,500+",
+                text: "A polished custom site for brands that need a clean, elevated, and professional online presence.",
+                items: [
+                  "Custom homepage design",
+                  "Responsive build",
+                  "Branded content sections",
+                  "Inquiry or contact CTA",
+                ],
+                featured: false,
+              },
+              {
+                name: "Signature",
+                price: "$5,500+",
+                text: "A fuller luxury website experience for brands ready to look more established, refined, and conversion-ready.",
+                items: [
+                  "Multi-section or multi-page build",
+                  "Luxury design direction",
+                  "Higher-end brand positioning",
+                  "Refined call-to-action flow",
+                ],
+                featured: true,
+              },
+              {
+                name: "Bespoke",
+                price: "$8,000+",
+                text: "For brands needing a more tailored experience with expanded scope, more advanced pages, and a fully premium presentation.",
+                items: [
+                  "Custom scope and visual strategy",
+                  "Premium design direction",
+                  "Expanded pages or features",
+                  "Built for stronger brand presence",
+                ],
+                featured: false,
+              },
+            ].map((tier) => (
+              <motion.div
+                key={tier.name}
+                whileHover={{ y: -6 }}
+                className={
+                  tier.featured
+                    ? "relative rounded-[2rem] border border-[#1D4131] bg-[linear-gradient(180deg,#163126_0%,#10241C_100%)] p-8 text-white shadow-[0_30px_85px_rgba(22,49,38,0.24)]"
+                    : "rounded-[2rem] border border-[#DFD8CC] bg-[#FCFAF6]/90 p-8 shadow-[0_20px_60px_rgba(22,49,38,0.08)] backdrop-blur-xl"
+                }
+              >
+                {tier.featured && (
+                  <div className="absolute right-6 top-6 rounded-full bg-[#F3E8D8] px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-[#163126]">
+                    Most Popular
+                  </div>
+                )}
 
-              <ul className="mt-7 space-y-3 text-sm text-[#163126]">
-                <li>Custom homepage design</li>
-                <li>Responsive build</li>
-                <li>Branded content sections</li>
-                <li>Inquiry or contact CTA</li>
-              </ul>
-            </motion.div>
+                <p
+                  className={
+                    tier.featured
+                      ? "text-sm uppercase tracking-[0.25em] text-[#DCC5A1]"
+                      : "text-sm uppercase tracking-[0.25em] text-[#C5A46D]"
+                  }
+                >
+                  {tier.name}
+                </p>
 
-            <motion.div
-              whileHover={{ y: -6 }}
-              className="relative rounded-[2rem] border border-[#1D4131] bg-[linear-gradient(180deg,#163126_0%,#10241C_100%)] p-8 text-white shadow-[0_30px_85px_rgba(22,49,38,0.24)]"
-            >
-              <div className="absolute right-6 top-6 rounded-full bg-[#F3E8D8] px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-[#163126]">
-                Most Popular
-              </div>
+                <h3 className="mt-4 text-4xl font-semibold">{tier.price}</h3>
 
-              <p className="text-sm uppercase tracking-[0.25em] text-[#DCC5A1]">
-                Signature
-              </p>
-              <h3 className="mt-4 text-4xl font-semibold">$5,500+</h3>
-              <p className="mt-4 text-sm leading-7 text-white/82">
-                A fuller luxury website experience for brands ready to look more
-                established, refined, and conversion-ready.
-              </p>
+                <p
+                  className={
+                    tier.featured
+                      ? "mt-4 text-sm leading-7 text-white/82"
+                      : "mt-4 text-sm leading-7 text-[#7B746B]"
+                  }
+                >
+                  {tier.text}
+                </p>
 
-              <ul className="mt-7 space-y-3 text-sm text-white">
-                <li>Multi-section or multi-page build</li>
-                <li>Luxury design direction</li>
-                <li>Higher-end brand positioning</li>
-                <li>Refined call-to-action flow</li>
-              </ul>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ y: -6 }}
-              className="rounded-[2rem] border border-[#DFD8CC] bg-[#FCFAF6]/90 p-8 shadow-[0_20px_60px_rgba(22,49,38,0.08)] backdrop-blur-xl"
-            >
-              <p className="text-sm uppercase tracking-[0.25em] text-[#C5A46D]">
-                Bespoke
-              </p>
-              <h3 className="mt-4 text-4xl font-semibold text-[#163126]">
-                $8,000+
-              </h3>
-              <p className="mt-4 text-sm leading-7 text-[#7B746B]">
-                For brands needing a more tailored experience with expanded
-                scope, more advanced pages, and a fully premium presentation.
-              </p>
-
-              <ul className="mt-7 space-y-3 text-sm text-[#163126]">
-                <li>Custom scope and visual strategy</li>
-                <li>Premium design direction</li>
-                <li>Expanded pages or features</li>
-                <li>Built for stronger brand presence</li>
-              </ul>
-            </motion.div>
+                <ul
+                  className={
+                    tier.featured
+                      ? "mt-7 space-y-3 text-sm text-white"
+                      : "mt-7 space-y-3 text-sm text-[#163126]"
+                  }
+                >
+                  {tier.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </section>
 
-      {/* CONTACT / BOOKING */}
-      <section id="contact" className="relative z-10 px-6 py-24 md:px-12 md:py-28 lg:px-20">
+      <section
+        id="contact"
+        className="relative z-10 px-6 py-24 md:px-12 md:py-28 lg:px-20"
+      >
         <motion.div
           {...fadeUp}
           className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.95fr_1.05fr]"
@@ -725,91 +752,90 @@ export default function Home() {
                 Email Me Directly
               </a>
 
-   <form
-  action="https://formspree.io/f/mwvabobn"
-  method="POST"
-  className="mt-8 space-y-4"
->
-  <input
-    type="text"
-    name="name"
-    placeholder="Your name"
-    required
-    className="w-full rounded-2xl border border-[#D6C4A7] bg-white px-5 py-4 text-sm text-[#163126] outline-none placeholder:text-[#7B746B]"
-  />
+              <form
+                action="https://formspree.io/f/mwvabobn"
+                method="POST"
+                className="mt-8 space-y-4"
+              >
+                <input
+                  type="hidden"
+                  name="_next"
+                  value="https://laurenparkerstudio.com/thank-you"
+                />
 
-  <input
-  type="hidden"
-  name="_next"
-  value="https://laurenparkerstudio.com/thank-you"
-/>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your name"
+                  required
+                  className="w-full rounded-2xl border border-[#D6C4A7] bg-white px-5 py-4 text-sm text-[#163126] outline-none placeholder:text-[#7B746B]"
+                />
 
-  <input
-    type="email"
-    name="email"
-    placeholder="Your email"
-    required
-    className="w-full rounded-2xl border border-[#D6C4A7] bg-white px-5 py-4 text-sm text-[#163126] outline-none placeholder:text-[#7B746B]"
-  />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Your email"
+                  required
+                  className="w-full rounded-2xl border border-[#D6C4A7] bg-white px-5 py-4 text-sm text-[#163126] outline-none placeholder:text-[#7B746B]"
+                />
 
-  <input
-    type="text"
-    name="business"
-    placeholder="Business name"
-    className="w-full rounded-2xl border border-[#D6C4A7] bg-white px-5 py-4 text-sm text-[#163126] outline-none placeholder:text-[#7B746B]"
-  />
+                <input
+                  type="text"
+                  name="business"
+                  placeholder="Business name"
+                  className="w-full rounded-2xl border border-[#D6C4A7] bg-white px-5 py-4 text-sm text-[#163126] outline-none placeholder:text-[#7B746B]"
+                />
 
-  <select
-    name="website_type"
-    className="w-full rounded-2xl border border-[#D6C4A7] bg-white px-5 py-4 text-sm text-[#163126] outline-none"
-    defaultValue=""
-    required
-  >
-    <option value="" disabled>
-      What type of website do you need?
-    </option>
-    <option value="Portfolio website">Portfolio website</option>
-    <option value="Business website">Business website</option>
-    <option value="Service-based website">Service-based website</option>
-    <option value="Luxury brand website">Luxury brand website</option>
-    <option value="Website redesign">Website redesign</option>
-  </select>
+                <select
+                  name="website_type"
+                  className="w-full rounded-2xl border border-[#D6C4A7] bg-white px-5 py-4 text-sm text-[#163126] outline-none"
+                  defaultValue=""
+                  required
+                >
+                  <option value="" disabled>
+                    What type of website do you need?
+                  </option>
+                  <option value="Portfolio website">Portfolio website</option>
+                  <option value="Business website">Business website</option>
+                  <option value="Service-based website">
+                    Service-based website
+                  </option>
+                  <option value="Luxury brand website">
+                    Luxury brand website
+                  </option>
+                  <option value="Website redesign">Website redesign</option>
+                </select>
 
-  <select
-    name="budget"
-    className="w-full rounded-2xl border border-[#D6C4A7] bg-white px-5 py-4 text-sm text-[#163126] outline-none"
-    defaultValue=""
-    required
-  >
-    <option value="" disabled>
-      Investment range
-    </option>
-    <option value="$3,500-$5,500">$3,500–$5,500</option>
-    <option value="$5,500-$8,000">$5,500–$8,000</option>
-    <option value="$8,000+">$8,000+</option>
-    <option value="Not sure yet">Not sure yet</option>
-  </select>
+                <select
+                  name="budget"
+                  className="w-full rounded-2xl border border-[#D6C4A7] bg-white px-5 py-4 text-sm text-[#163126] outline-none"
+                  defaultValue=""
+                  required
+                >
+                  <option value="" disabled>
+                    Investment range
+                  </option>
+                  <option value="$3,500-$5,500">$3,500–$5,500</option>
+                  <option value="$5,500-$8,000">$5,500–$8,000</option>
+                  <option value="$8,000+">$8,000+</option>
+                  <option value="Not sure yet">Not sure yet</option>
+                </select>
 
-  <textarea
-    name="message"
-    placeholder="Tell me about your project, goals, and the vibe you want."
-    required
-    rows={6}
-    className="w-full rounded-[1.5rem] border border-[#D6C4A7] bg-white px-5 py-4 text-sm text-[#163126] outline-none placeholder:text-[#7B746B]"
-  />
+                <textarea
+                  name="message"
+                  placeholder="Tell me about your project, goals, and the vibe you want."
+                  required
+                  rows={6}
+                  className="w-full rounded-[1.5rem] border border-[#D6C4A7] bg-white px-5 py-4 text-sm text-[#163126] outline-none placeholder:text-[#7B746B]"
+                />
 
-  <button
-    type="submit"
-    className="block w-full rounded-full bg-[#163126] px-6 py-4 text-center text-sm font-medium text-white shadow-[0_14px_34px_rgba(22,49,38,0.18)] transition duration-300 hover:-translate-y-[1px] hover:bg-[#10241C]"
-  >
-    Submit Inquiry
-  </button>
-  <input
-  type="hidden"
-  name="_next"
-  value="https://your-site-url.com/thank-you"
-/>
-</form>
+                <button
+                  type="submit"
+                  className="block w-full rounded-full bg-[#163126] px-6 py-4 text-center text-sm font-medium text-white shadow-[0_14px_34px_rgba(22,49,38,0.18)] transition duration-300 hover:-translate-y-[1px] hover:bg-[#10241C]"
+                >
+                  Submit Inquiry
+                </button>
+              </form>
             </div>
 
             <div className="mt-8 rounded-[1.5rem] border border-[#E4DED4] bg-[#F8FAF8] p-5">
@@ -821,7 +847,9 @@ export default function Home() {
                 <li>What type of website do you need?</li>
                 <li>What is your target launch date?</li>
                 <li>What investment range are you comfortable with?</li>
-                <li>What overall style or mood do you want your brand to have?</li>
+                <li>
+                  What overall style or mood do you want your brand to have?
+                </li>
               </ul>
             </div>
           </div>

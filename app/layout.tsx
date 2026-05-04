@@ -2,9 +2,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Lauren Parker | Luxury Web Designer & Developer",
+  title: "Lauren Parker | Full Stack Developer & Luxury Web Designer",
   description:
-    "Luxury web design and development portfolio by Lauren Parker.",
+    "Full stack developer and luxury web designer building modern, responsive websites with React, Next.js, Supabase, and refined visual design.",
 };
 
 export default function RootLayout({
